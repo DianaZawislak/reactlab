@@ -1,7 +1,8 @@
 import React from "react";
-import { Avatar, Box, Heading, VStack } from "@chakra-ui/react";
+import { Avatar, Box, Heading, VStack, Text, Image } from "@chakra-ui/react";
 import FullScreenSection from "./FullScreenSection";
 import avatar from "../images/generic-avatar.png";
+import logo from "../images/react.svg";
 
 const greeting = "Hello, I am Diana!";
 const bio1 = "A frontend developer";
@@ -16,16 +17,19 @@ const LandingSection = () => (
     justifyContent="center"
     alignItems="center"
     isDarkBackground
-    bgGradient='linear(to-r, #C0C0C0, blue.400, #C0C0C0)'
+    bgGradient='linear(to-r, #B0B0B0, #B0B0B0, #989898 20%, #808080, #989898 80%, #B0B0B0, #B0B0B0)'
   >
-  <VStack>
-    <VStack mb="8">
+
+    <VStack mb="20" id="home-section">
       <Avatar size='2xl' src={avatar}/>
-      <profile size='60'>{greeting}</profile>
-    </VStack>
-      <Heading>{bio1}</Heading>
-      <Heading>{bio2}</Heading>
+      <Text fontSize='3xl' as='b' color='#000078'>{greeting}</Text>
+      <Heading as='h1' size='3xl' color='#D0D0D0' noOfLines={1}>{bio1}</Heading>
+      <Heading as='h2' size='3xl' color='#D0D0D0' noOfLines={1}>{bio2}</Heading>
+     
+       
   </VStack>
+  <Image boxSize='300px' src={logo} alt='React' />   
+
 
   </FullScreenSection>
 
