@@ -22,10 +22,30 @@ const LandingSection = () => {
   const { onOpen } = useAlertContext();
 
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {},
-    validationSchema: Yup.object({}),
+    initialValues: {
+      firstName:"", 
+      email:"", 
+      type:"", 
+      comment:""
+    },
+    onSubmit: (values) => {
+      submit('', values)
+
+      formik.resetForm()
+    },
+    validationSchema: Yup.object().shape({
+      firstName: Yup.string().required("Name Required*"),
+      email: Yup.string().email("Invalid email!").required("Email Required*"),
+      type: Yup.string('hireMe' | 'openSource' | 'other'), 
+      comment: Yup.string().required("Comment Required*").min(25, "Must be at least 25 characters")
+    }),
   });
+
+  useEffect(() => {
+    if (!response) { return }
+
+    onOpen(response.type, response.message)
+  }, [response])
 
   return (
     <FullScreenSection
