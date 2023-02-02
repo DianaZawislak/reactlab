@@ -52,7 +52,7 @@ const Header = () => {
       right={0}
       translateY={0}
       transitionProperty="transform"
-      transitionDuration=".3s"
+      transitionDuration=".9s"
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
@@ -78,7 +78,7 @@ const Header = () => {
           <nav>
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
-              <Link onClick={handleClick("LandingSection")}>Home</Link>
+              <Link onClick={handleClick("home")}>Home</Link>
               <Link onClick={handleClick("contactme")}>Contact Me</Link>
               <Link onClick={handleClick("projects")}>Projects</Link>
             </HStack>
