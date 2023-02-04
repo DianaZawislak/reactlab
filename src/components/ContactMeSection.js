@@ -16,6 +16,8 @@ import * as Yup from 'yup';
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import {useAlertContext} from "../context/alertContext";
+import ReactDOM from "react-dom";
+
 
 const LandingSection = () => {
   const {isLoading, response, submit} = useSubmit();
@@ -58,7 +60,7 @@ const LandingSection = () => {
   return (
     <FullScreenSection
       isDarkBackground
-      backgroundColor="darkgrey"
+      bgGradient='linear(to-r, #B0B0B0, #B0B0B0, #989898 20%, #808080, #989898 80%, #B0B0B0, #B0B0B0)'
       py={16}
       spacing={8}
     >
@@ -67,47 +69,55 @@ const LandingSection = () => {
           Contact me
         </Heading>
         <Box p={6} rounded="md" w="100%">
-          <form>
+          <form onSubmit={(e) => {e.preventDefault(); formik.handleSubmit(e)}}>
             <VStack spacing={4}>
-              <FormControl isInvalid={false}>
+
+
+              <FormControl isInvalid={formik.touched.firstName && formik.errors.firstName}>
                 <FormLabel htmlFor="firstName">Name</FormLabel>
                 <Input
                   id="firstName"
                   name="firstName"
-                  {...formik.getFieldProps('firstName')}
+                  {...formik.getFieldProps("firstName")}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={false}>
+
+
+              <FormControl isInvalid={formik.touched.email && formik.errors.email}>
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
                   id="email"
                   name="email"
                   type="email"
+                  {...formik.getFieldProps("email")}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
+
+
               <FormControl>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
-                <Select id="type" name="type">
-                  <option value="hireMe">Freelance project proposal</option>
-                  <option value="openSource">
-                    Open source consultancy session
-                  </option>
-                  <option value="other">Other</option>
+                <Select id="type" name="type" {...formik.getFieldProps("type")}>
+                  <option style={{ color: 'black'}}value="hireMe" >Freelance project proposal</option>
+                  <option style={{ color: 'black'}}value="openSource">Open source consultancy session</option>
+                  <option style={{ color: 'black'}}value="other">Other</option>
                 </Select>
               </FormControl>
-              <FormControl isInvalid={false}>
+              <FormControl isInvalid={formik.touched.comment && formik.errors.comment}>
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
                   id="comment"
                   name="comment"
                   height={250}
+                  {...formik.getFieldProps("comment")}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
+
+
               <Button type="submit" colorScheme="teal" width="full">
-                Submit
+                {isLoading ? "...Loading" : "Submit"}
               </Button>
             </VStack>
           </form>
@@ -118,3 +128,4 @@ const LandingSection = () => {
 };
 
 export default LandingSection;
+
